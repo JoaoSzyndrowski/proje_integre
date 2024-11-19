@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro e Login - MisturaSoft</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Login mistura soft</title>
     <style>
         * {
             margin: 0;
@@ -130,27 +131,22 @@
     </style>
 </head>
 <body>
-    <div class="container">
+<div class="container">
         <div class="login-section"> 
             <img src="../imagens/logomini.png" alt="">
             <h1>Seja bem-vindo à MisturaSoft!</h1>
             <br><br><br><br>
-            <p>Já tem uma conta?</p>
-            <a href="login.php">
-            <button>Login</button>
+            <p>Não tem uma conta?</p>
+            <a href="criaLogin.php">
+            <button>Cadastro</button>
             </a>
         </div>
         <div class="signup-section">
-            <form action="../model/guardaLogin.php" method="POST">
-            <h2>Criar Conta</h2>
-            <center><input type="text" id="nome" name="nome" placeholder="Nome Completo"></center>
-            <center><input type="email" id="email" name="email" placeholder="Email"></center>
+            <form action="../model/auth/processaLogin.php" method="POST">
+            <h2>Logar</h2>
+           <center> <input type="email" id="email" name="email" placeholder="Email"></center>
             <center><input type="password" id="senha" name="senha" placeholder="Senha"></center>
-            <center><select name="userTipo"></center>
-            <center><option name="adm" value="adm">Administrador</option></center>
-            <center><option name="cliente" value="cliente">Cliente</option></center>
-            </select>
-            <center><button type="submit">Criar</button></center>
+            <center><button type="submit">Logar</button></center>
             </form>
         </div>
     </div>

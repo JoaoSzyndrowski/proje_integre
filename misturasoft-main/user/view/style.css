@@ -1,0 +1,155 @@
+/*estilo geral */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+      
+}
+ body{
+    background-color: #EFE9E9;
+    height: 100vh;
+}
+.interface{
+    max-width: 100%;
+    margin: auto;
+}
+.flex{
+    display: flex;
+}
+.btn button{
+    padding: 10px 40px;
+    font-size: 18px;
+    font-weight: 600;
+    background-color: #72B629;
+    border: 0;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+h2.titulo{
+    color: #ffffff;
+    font-size: 38px;
+    text-align: center;
+}
+
+h2.titulo span{
+    color:  #72B629
+}
+ button:hover{
+    box-shadow: 0px 0px 8px #72B629;
+    transform: scale(1.05);
+}
+/*acaba o estilo geral */
+/* estilo do cabeçalho */
+header{
+    padding: 40px 4%;
+}
+header > .interface{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+header a{
+    color: #5c5c5c;
+    text-decoration: none;
+    display: inline-block;
+    transition: .2s;
+}
+header a:hover{
+    color: #000000;
+    transform: scale(1.05); 
+}
+header nav ul{
+    list-style-type: none;
+}
+header nav ul li{
+    display: inline-block;
+    padding: 0 40px;
+}
+
+ .btn button:hover{
+    box-shadow: 0px 0px 8px #72B629;
+    transform: scale(1.05);
+    
+
+}
+/* estilo do topo do site */
+section.topo-do-site{
+    padding: 40px 4%;
+}
+section.topo-do-site .flex{
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+}
+.topo-do-site h1{
+    color: #000000;
+    font-size: 42px;
+    line-height: 40px;
+}
+.topo-do-site .txt-topo-site h1 span{
+    color:#72B629;
+}
+.topo-do-site .txt-topo-site p{
+    color:#000000;
+    margin:40px 0;
+
+}
+
+.img-inicial-site img{
+    align-self : center;
+    display: FLEX;
+    justify-content: right;
+    position: relative;
+	left:55%;
+	top:50%;
+    
+}
+
+span{
+    color :#72B629;
+}
+
+.btn-btn {
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    left: 45%;
+}
+.btn-social button{
+    position: relative;
+    left: 100%;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    border:0;
+    background-color: #72B629;
+    font-size:25px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+/*estilo do rodape*/
+footer{
+    padding: 40px 4%;
+    box-shadow: 0 0 40px 10px #ffffff1d;
+}
+footer .flex{
+    justify-content: space-between;
+}
+footer .line-footer{
+    padding: 20px 0;
+}
+.borda{
+    border-top: 2px solid #72B629;
+}
+footer .line-footer p i{
+    color:#72B629;
+    font-size: 20px;
+}
+footer .line-footer p a{
+    color: #fff;
+}

@@ -1,11 +1,5 @@
-<?php
-session_start();
-?>
-
-
 <!DOCTYPE html>
-<html lang="pt-br   ">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,40 +16,23 @@ session_start();
     <link rel="stylesheet" href="style.css">
     <title>MISTURA FINA FESTAS</title>
 </head>
-
 <body>
-    <header>
+<header>
         <div class="interface">
             <div class="logo">
-                <a href="index.html">
-                    <img src="imagens/logo.png" alt="" height="100" width="230">
+                <a href="/misturasoft-main/iniciologado.html">
+                    <img src="/misturasoft-main/imagens/logo.png" alt="" height="100" width="230">
                 </a>
             </div>
 
             <nav class="menu-desktop">
                 <ul>
-                    <li><a href="#">Início </a></li>
-                    <li><a href="view/brinquedos.php">Brinquedos </a></li>
-                    <li><a href="view/sobre.php">Sobre </a></li>
+                    <li><a href="/misturasoft-main/iniciologado.html">Início </a></li>   
+                    <li><a href="brinquedos.php">Brinquedos </a></li>
+                    <li><a href="sobre.php">Sobre </a></li>
                 </ul>
             </nav>
-            <?php
-                    if(isset($_SESSION['nome'])){
-                        echo "<div class='btn'>
-                        <a href='view/login.php'>
-                            <button>"."Bem vindo, ".$_SESSION['nome']."</button>
-                        </a>
-                    </div>";
-                    }else{
-                        echo "<div class='btn'>
-                <a href='view/login.php'>
-                    <button>Logar-se</button>
-                </a>
-            </div>"; 
-                    }
-                ?>
             
-        </div>
     </header>
     <main>
         <section class="topo-do-site">
@@ -63,35 +40,15 @@ session_start();
                 <div class="flex">
                     <div class="txt-topo-site">
                         <h1>
-                            TODOS OS SEUS SONHOS DIVERTIDOS SE TORNAM REALIDADE COM NOSSOS BRINQUEDOS, CADA SORRISO É
-                            UMA AVENTURA INESQUECÍVEL<span>!</span>
+                            Sobre-nós<span>!</span>
                         </h1>
-                        <p></p>
-
+                        <p>texto</p>    
                     </div>
-
                 </div>
-                <?php
-                    if(isset($_SESSION['nome'])){
-                        echo "<div>
-                                <a href='view/brinquedos.php' style='font-size:25px'>
-                                    <span>"."Agendar"."</span>
-                                </a>
-                              </div>";
-                    }else{
-                        echo "<div>
-                        <a href='view/criaLogin.php' style='font-size:25px'>
-                            <span>Registrar-se</span>
-                        </a>
-                      </div>"; 
-                    }
-                ?>
-                <div class="img-inicial-site">
-                    <img src="imagens/joaotouro.png" alt="eu">
-                </div>
-            </div>
-        </section>
-        <footer>
+</section>
+</body>
+</html>
+<footer>
             <div class="interface">
                 <div class="line-footer">
                     <div class="flex">
@@ -104,7 +61,9 @@ session_start();
                     <div class="btn-social">
                         <a href="https://www.instagram.com/joaosz_silva/">
                             <button>
-                                <i class="bi bi-instagram"></i>
+                                <i
+                                    class="bi bi-instagram">
+                                </i>
                             </button>
                         </a>
                         <a href="https://www.youtube.com/channel/UC8JcCOh-2ephQE_e4OaaH1Q"><button><i
@@ -114,7 +73,7 @@ session_start();
                         <a href="https://twitter.com/jao_wick_"><button><i class="bi bi-envelope"></i></button></a>
                     </div>
                 </div>
-                <img src="imagens/logo.png" alt="logo" height="100" width="230">
+                <img src="/misturasoft-main/imagens/logo.png" alt="logo" height="100" width="230">
 
             </div>
         </footer>

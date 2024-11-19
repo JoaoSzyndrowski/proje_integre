@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Tempo de geração: 18/11/2024 às 21:03
+-- Host: 127.0.0.1
+-- Tempo de geração: 19/11/2024 às 04:28
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -37,6 +37,26 @@ CREATE TABLE `agendamento` (
   `sts` enum('concluido','em andamento') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `agendamento`
+--
+
+INSERT INTO `agendamento` (`id_agenda`, `data`, `id_produto`, `horainicio`, `horafim`, `id_cliente`, `sts`) VALUES
+(19, '0000-00-00', 1, '00:00:03', '00:20:24', 1, 'concluido'),
+(20, '0000-00-00', 1, '00:00:03', '00:20:24', NULL, 'concluido'),
+(21, '0000-00-00', 1, '00:00:11', '00:20:24', NULL, 'concluido'),
+(22, '0000-00-00', 1, '00:00:00', '00:20:24', NULL, 'concluido'),
+(23, '0000-00-00', 1, '00:00:04', '00:20:24', NULL, 'concluido'),
+(24, '0000-00-00', 1, '04:43:00', '00:20:24', NULL, 'concluido'),
+(25, '0000-00-00', 1, '04:43:00', '00:20:24', NULL, 'concluido'),
+(26, '0000-00-00', 1, '04:43:00', '00:20:24', NULL, 'concluido'),
+(27, '0000-00-00', 1, '04:43:00', '00:20:24', NULL, 'concluido'),
+(28, '0000-00-00', 1, '04:43:00', '00:20:24', NULL, 'concluido'),
+(29, '2024-11-21', 1, '01:43:00', '04:43:00', 1, 'concluido'),
+(30, '2024-11-19', 2, '03:53:00', '05:53:00', 1, 'concluido'),
+(31, '2024-11-12', 3, '00:07:00', '00:09:00', 1, 'concluido'),
+(32, '2024-11-08', 4, '06:11:00', '21:11:00', 1, 'concluido');
+
 -- --------------------------------------------------------
 
 --
@@ -63,6 +83,13 @@ CREATE TABLE `cliente` (
   `endereco` varchar(200) DEFAULT NULL,
   `cpf` varchar(14) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `cliente`
+--
+
+INSERT INTO `cliente` (`id_cliente`, `nome`, `email`, `telefone`, `endereco`, `cpf`) VALUES
+(1, 'edu', 'tuamae@gmail.com', '666', '123123', '123123');
 
 -- --------------------------------------------------------
 
@@ -115,7 +142,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `nome`, `email`, `senha`, `tipo`) VALUES
-(1, 'eduardo', 'edu@gmail.com', 'edu', 'adm');
+(1, 'eduardo', 'edu@gmail.com', 'edu', 'adm'),
+(2, 'Eduardo Silveira Frigo', 'edu123@gmail.com', '$2y$10$k8d6WX3jN29roziXfaZhnuY2B5cLbAVxgafWsgCIPloZvWWetWp0G', NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -162,7 +190,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `agendamento`
 --
 ALTER TABLE `agendamento`
-  MODIFY `id_agenda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_agenda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de tabela `ag_prod_cliente`
@@ -174,7 +202,7 @@ ALTER TABLE `ag_prod_cliente`
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `produto`
@@ -186,7 +214,7 @@ ALTER TABLE `produto`
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restrições para tabelas despejadas

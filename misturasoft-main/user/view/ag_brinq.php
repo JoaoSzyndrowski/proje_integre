@@ -138,7 +138,7 @@ $idProduto = isset($_GET['id']) ? $_GET['id'] : null;
         <div class="decorative-right"></div>
 
         <h2>AGENDAMENTO</h2>
-        <form action="../model/validaDataeHora.php" method="GET">
+        <form action="../model/auth/processaAg.php" method="POST">
             <div class="calendar">
                 <!-- calendário -->
                 <input type="date" name="data" required>
