@@ -31,8 +31,8 @@ $result = $conn->query($sql);
                     echo "<td>" . htmlspecialchars($row['id_usuario']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['email']) . "</td>";
-                    echo "<td><a href='editar_usuario.php?id=" . $row['id_usuario'] . "'>Editar</a></td>";
-                    echo "<td><a href='excluir_usuario.php?id=" . $row['id_usuario'] . "'>Excluir</a></td>";
+                    echo "<td><a href='../model/editarUser.php?id=" . $row['id_usuario'] . "'>Editar</a></td>";
+                    echo "<td><a href='../model/excluirUser.php?id=" . $row['id_usuario'] . "'>Excluir</a></td>";
                     echo "</tr>";
                 }
             } else {

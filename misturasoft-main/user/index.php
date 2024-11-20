@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 
 
@@ -40,10 +41,10 @@ session_start();
                 </ul>
             </nav>
             <?php
-                    if(isset($_SESSION['nome'])){
+                    if(isset($_SESSION['user'])){
                         echo "<div class='btn'>
                         <a href='view/login.php'>
-                            <button>"."Bem vindo, ".$_SESSION['nome']."</button>
+                            <button>"."Bem vindo, ".$_SESSION['user']."</button>
                         </a>
                     </div>";
                     }else{
@@ -72,7 +73,7 @@ session_start();
 
                 </div>
                 <?php
-                    if(isset($_SESSION['nome'])){
+                    if(isset($_SESSION['user'])){
                         echo "<div>
                                 <a href='view/brinquedos.php' style='font-size:25px'>
                                     <span>"."Agendar"."</span>
