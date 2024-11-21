@@ -14,6 +14,7 @@ $result = $conn->query($sql);
 </head>
 <body>
     <table border="1">
+        <a href="../model/prod/inserirProd.php">inserir prods</a>
         <thead>
             <tr>
                 <th>ID</th>
@@ -39,8 +40,8 @@ $result = $conn->query($sql);
                     echo "<td>" . htmlspecialchars($row['tamanho']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['faixa_etaria']) . "</td>"; 
                     echo "<td>" . htmlspecialchars($row['status']) . "</td>";
-                    echo "<td><a href='../model/editarProd.php?id=" . $row['id_produto'] . "'>Editar</a></td>";
-                    echo "<td><a href='../model/excluirProd.php?id=" . $row['id_produto'] . "'>Excluir</a></td>";
+                    echo "<td><a href='../model/prod/editarProd.php?id=" . $row['id_produto'] . "'>Editar</a></td>";
+                    echo "<td><a href='../model/prod/excluirProd.php?id=" . $row['id_produto'] . "'>Excluir</a></td>";
                     echo "</tr>";
                 }
             } else {

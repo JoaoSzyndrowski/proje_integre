@@ -73,7 +73,7 @@ function login($email, $senhaForm)
             $_SESSION['user'] = $row['nome'];
             echo "Login bem-sucedido! Bem-vindo, " . htmlspecialchars($row['nome']);
             // Redireciona para a página inicial ou dashboard após login
-            header("Location: /tcc/proje_integre/misturasoft-main/user/index.php");
+            header("Location: /tccJAO/proje_integre/misturasoft-main/user/index.php");
             exit(); // Certifique-se de que o código após o header não seja executado
         } else {
             echo "Senha incorreta.";

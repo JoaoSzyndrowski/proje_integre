@@ -1,5 +1,5 @@
 <?php
-include("../control/conexao.php");
+include("../../control/conexao.php");
 
 // Verifica se o ID foi passado na URL
 if (isset($_GET['id'])) {
@@ -30,7 +30,7 @@ if (isset($_GET['id'])) {
             sleep(5);
             echo "<script type='text/javascript'>
             alert('alteracao feita com xuxexo'); // Mensagem do alerta
-            window.location.href = '../view/brinquedo.php'; // Redireciona após o alerta
+            window.location.href = '../../view/brinquedo.php'; // Redireciona após o alerta
             </script>";
             exit;
         } else {

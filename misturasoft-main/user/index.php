@@ -21,9 +21,8 @@ session_start();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- fim icons-->
     <link rel="stylesheet" href="style.css">
-    <title>MISTURA FINA FESTAS</title>
+    <title>Mistura Fina</title>
 </head>
-
 <body>
     <header>
         <div class="interface">
@@ -32,7 +31,6 @@ session_start();
                     <img src="imagens/logo.png" alt="" height="100" width="230">
                 </a>
             </div>
-
             <nav class="menu-desktop">
                 <ul>
                     <li><a href="#">Início </a></li>
@@ -41,21 +39,20 @@ session_start();
                 </ul>
             </nav>
             <?php
-                    if(isset($_SESSION['user'])){
-                        echo "<div class='btn'>
+            if (isset($_SESSION['user'])) {
+                echo "<div class='btn'>
                         <a href='view/login.php'>
-                            <button>"."Bem vindo, ".$_SESSION['user']."</button>
+                            <button>" . "Bem vindo, " . $_SESSION['user'] . "</button>
                         </a>
                     </div>";
-                    }else{
-                        echo "<div class='btn'>
+            } else {
+                echo "<div class='btn'>
                 <a href='view/login.php'>
                     <button>Logar-se</button>
                 </a>
-            </div>"; 
-                    }
-                ?>
-            
+            </div>";
+            }
+            ?>
         </div>
     </header>
     <main>
@@ -68,24 +65,22 @@ session_start();
                             UMA AVENTURA INESQUECÍVEL<span>!</span>
                         </h1>
                         <p></p>
-
                     </div>
-
                 </div>
                 <?php
-                    if(isset($_SESSION['user'])){
-                        echo "<div>
-                                <a href='view/brinquedos.php' style='font-size:25px'>
-                                    <span>"."Agendar"."</span>
-                                </a>
-                              </div>";
-                    }else{
-                        echo "<div>
+                if (isset($_SESSION['user'])) {
+                    echo "<div>
+                        <a href='view/brinquedos.php' style='font-size:25px; text-decoration:none; outline:none;'>
+                            <span>" . "Agendar" . "</span>
+                        </a>
+                        </div>";
+                } else {
+                    echo "<div>
                         <a href='view/criaLogin.php' style='font-size:25px'>
                             <span>Registrar-se</span>
                         </a>
-                      </div>"; 
-                    }
+                        </div>";
+                }
                 ?>
                 <div class="img-inicial-site">
                     <img src="imagens/joaotouro.png" alt="eu">
@@ -116,6 +111,5 @@ session_start();
                     </div>
                 </div>
                 <img src="imagens/logo.png" alt="logo" height="100" width="230">
-
             </div>
         </footer>

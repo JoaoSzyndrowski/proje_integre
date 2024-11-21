@@ -2,23 +2,40 @@
 // sem isso, nem eu funciono
 include("conexao.php");
 
-
 $limite = 5;
 $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $offset = ($pagina - 1) * $limite;
 
+// Recupera o termo de pesquisa, se existir
+$pesquisa = isset($_GET['pesquisa']) ? $_GET['pesquisa'] : '';
 
-$sql = "SELECT * FROM produto LIMIT $limite OFFSET $offset";
-$resultado = mysqli_query($conn, $sql);
+// Filtra os produtos pela pesquisa
+if ($pesquisa) {
+    // Prepara a consulta com filtro
+    $sql = "SELECT * FROM produto WHERE nome LIKE ? LIMIT $limite OFFSET $offset";
+    $stmt = mysqli_prepare($conn, $sql);
+    $search_term = "%" . $pesquisa . "%";  // Asterisco é usado para buscar por termos semelhantes
+    mysqli_stmt_bind_param($stmt, 's', $search_term);  // 's' para string
+    mysqli_stmt_execute($stmt);
+    $resultado = mysqli_stmt_get_result($stmt);
+} else {
+    // Consulta sem filtro de pesquisa
+    $sql = "SELECT * FROM produto LIMIT $limite OFFSET $offset";
+    $resultado = mysqli_query($conn, $sql);
+}
 
 if ($resultado) {
     $produtos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
 } else {
     $produtos = [];
 }
-//conta prod
-$sql_total = "SELECT COUNT(*) AS total FROM produto";
-$resultado_total = mysqli_query($conn, $sql_total);
+
+// Conta total de produtos (com ou sem pesquisa)
+$sql_total = "SELECT COUNT(*) AS total FROM produto WHERE nome LIKE ?";
+$stmt_total = mysqli_prepare($conn, $sql_total);
+mysqli_stmt_bind_param($stmt_total, 's', $search_term);
+mysqli_stmt_execute($stmt_total);
+$resultado_total = mysqli_stmt_get_result($stmt_total);
 $total_produtos = mysqli_fetch_assoc($resultado_total)['total'];
 
 mysqli_close($conn);
@@ -175,6 +192,7 @@ mysqli_close($conn);
         .load-more:hover {
             background-color: #5b8d36;
         }
+
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
@@ -207,7 +225,7 @@ mysqli_close($conn);
             </div>
             <nav>
                 <ul>
-                    <li><a href="/misturasoft-main/iniciologado.html">Início</a></li>
+                    <li><a href="../index.php">Início</a></li>
                     <li><a href="#">Brinquedos</a></li>
                     <li><a href="sobre.php">Sobre nós</a></li>
                 </ul>
@@ -215,32 +233,34 @@ mysqli_close($conn);
         </header>
         
         <div class="search-bar">
-            <input type="text" placeholder="Pesquisar brinquedo">
-            <button>🔍</button>
+            <form action="" method="GET">
+                <input type="text" name="pesquisa" placeholder="Pesquisar brinquedo" value="<?php echo isset($_GET['pesquisa']) ? htmlspecialchars($_GET['pesquisa']) : ''; ?>">
+                <button type="submit">🔍</button>
+            </form>
         </div>
 
         <h2>Brinquedos</h2>
         
         <div class="products">
-    <?php foreach ($produtos as $produto): ?>
-        <a href="ag_brinq.php?id=<?php echo urlencode($produto['id_produto']); ?>" class="product-link">
-            <div class="product-card" id="product-<?php echo $produto['id_produto']; ?>"> <!-- Adicionando o id dinâmico -->
-                <div class="product-image">
-                    <img src="imagens/<?php echo htmlspecialchars($produto['img']) ?: 'default.jpg'; ?>" alt="<?php echo htmlspecialchars($produto['nome']); ?>">
-                </div>
-                <div class="product-info">
-                    <h3><?php echo htmlspecialchars($produto['nome']); ?></h3>
-                    <p><?php echo htmlspecialchars(substr($produto['descricao'], 0, 100)); ?>...</p> <!-- Descrição truncada -->
-                </div>
-                <button>Reservar</button>
-            </div>
-        </a>
-    <?php endforeach; ?>
-</div>
+            <?php foreach ($produtos as $produto): ?>
+                <a href="ag_brinq.php?id=<?php echo urlencode($produto['id_produto']); ?>" class="product-link">
+                    <div class="product-card" id="product-<?php echo $produto['id_produto']; ?>">
+                        <div class="product-image">
+                            <img src="imagens/<?php echo htmlspecialchars($produto['img']) ?: 'default.jpg'; ?>" alt="<?php echo htmlspecialchars($produto['nome']); ?>">
+                        </div>
+                        <div class="product-info">
+                            <h3><?php echo htmlspecialchars($produto['nome']); ?></h3>
+                            <p><?php echo htmlspecialchars(substr($produto['descricao'], 0, 100)); ?>...</p>
+                        </div>
+                        <button>Reservar</button>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        </div>
 
         <?php if ($pagina * $limite < $total_produtos): ?>
             <div style="text-align: center; margin-top: 20px;">
-                <a href="?pagina=<?php echo $pagina + 1; ?>">
+                <a href="?pagina=<?php echo $pagina + 1; ?>&pesquisa=<?php echo urlencode($pesquisa); ?>">
                     <button class="load-more">Carregar Mais</button>
                 </a>
             </div>

@@ -1,5 +1,5 @@
 <?php
-include("../control/conexao.php");
+include("../../control/conexao.php");
 
 if ($conn->connect_error) {
     die("Erro de conexão: " . $conn->connect_error);
