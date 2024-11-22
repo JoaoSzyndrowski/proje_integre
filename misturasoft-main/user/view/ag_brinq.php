@@ -154,6 +154,17 @@ $idProduto = isset($_GET['id']) ? $_GET['id'] : null;
                     <input type="time" id="end-time" name="hora_fim" required>
                 </div>
             </div>
+            <div>
+                <label>Endereço:</label><br>
+                <label>Rua: </label>
+                <input type="text" name="rua" id="rua"><br>
+                <label>Bairro: </label>
+                <input type="text" name="bairro" id="bairro"><br>
+                <label>CEP: </label>
+                <input type="text" name="cep" id="cep"><br>
+                <label>Complemento: </label>
+                <input type="text" name="complemento" id="complemento"><br>
+            </div>
 
             <!-- Passando o ID do produto para a página de validação -->
             <input type="hidden" name="id_produto" value="<?php echo $idProduto; ?>">

@@ -88,19 +88,16 @@ function login($email, $senhaForm)
 
 function cadastraAg($idProduto, $data, $horaInicio, $horaFim)
 {
-
     session_start();
     include("conexao.php");
 
     // Verifica se o usuário está logado
     if (isset($_SESSION['id_user'])) {
         $idUser = $_SESSION['id_user'];
-        
     } else {
         echo "Faça login para realizar o agendamento";
         exit; // Finaliza o script caso o usuário não esteja logado
     }
-
 
     // Verifica se já existe um agendamento para o mesmo produto e data
     $sql = "SELECT * FROM agendamento WHERE data = ? AND id_produto = ?";
@@ -125,9 +122,11 @@ function cadastraAg($idProduto, $data, $horaInicio, $horaFim)
                           VALUES (?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sqlInsert);
             $sts = 'concluido'; // Define o status
-            $stmt->bind_param('sssss',$idProduto, $data, $horaInicio, $horaFim, $sts);
+            $stmt->bind_param('sssss', $data, $idProduto, $horaInicio, $horaFim, $sts);
             if ($stmt->execute()) {
                 echo 'Agendamento realizado com sucesso!';
+                // Captura o id do agendamento gerado
+                $idAgendamento = $conn->insert_id;
             } else {
                 echo 'Erro ao realizar o agendamento: ' . $stmt->error;
             }
@@ -138,16 +137,48 @@ function cadastraAg($idProduto, $data, $horaInicio, $horaFim)
         $sqlInsert = "INSERT INTO agendamento (data, id_produto, horainicio, horafim, id_cliente, sts) 
               VALUES (?, ?, ?, ?, ?, ?)";  // Inclui id_cliente corretamente
         $stmt = $conn->prepare($sqlInsert);
-        $idUser = 1;
-        // Aqui são passados os valores corretos de acordo com a tabela
+        // Aqui você usa o id do usuário logado
         $sts = 'concluido'; // Define o status
         $stmt->bind_param('ssssss', $data, $idProduto, $horaInicio, $horaFim, $idUser, $sts);
 
         if ($stmt->execute()) {
             echo 'Agendamento realizado com sucesso!';
+            // Captura o id do agendamento gerado
+            $idAgendamento = $conn->insert_id;
         } else {
             echo 'Erro ao realizar o agendamento: ' . $stmt->error;
         }
+    }
+
+    // Fecha a conexão
+    $conn->close();
+
+    return $idAgendamento; // Retorna o id do agendamento gerado
+}
+
+function cadastraAgProd($idProduto, $idUser, $hora_inicio, $hora_fim, $endereco, $idAgendamento)
+{
+    session_start();
+    include("conexao.php");
+
+    // Verifica se o usuário está logado
+    if (isset($_SESSION['id_user'])) {
+        $idUser = $_SESSION['id_user'];
+    } else {
+        echo "Faça login para realizar o agendamento";
+        exit; // Finaliza o script caso o usuário não esteja logado
+    }
+
+    // Insere o relacionamento na tabela ag_prod_cliente
+    $sqlInsertAgProd = "INSERT INTO ag_prod_cliente (id_produto, id_usuario, hora_inicio, hora_fim, endereco, id_agendamento) 
+                        VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sqlInsertAgProd);
+    $stmt->bind_param('iisssi', $idProduto, $idUser, $hora_inicio, $hora_fim, $endereco, $idAgendamento);
+
+    if ($stmt->execute()) {
+        echo 'Agendamento e vinculação com produto realizados com sucesso!';
+    } else {
+        echo 'Erro ao vincular agendamento e produto: ' . $stmt->error;
     }
 
     // Fecha a conexão
