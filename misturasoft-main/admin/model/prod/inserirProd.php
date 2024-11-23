@@ -1,9 +1,7 @@
 <?php
-include("../../control/conexao.php");
+include("control/conexao.php");
 
-// Verifica se o formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Obtém os dados do formulário
     $preco = $_POST['preco'];
     $nome = $_POST['nome'];
     $descricao = $_POST['descricao'];
@@ -11,11 +9,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $faixa_etaria = $_POST['faixa_etaria'];
     $status = $_POST['status'];
 
-    // Insere os dados na tabela produto
     $sql = "INSERT INTO produto (preco, nome, descricao, tamanho, faixa_etaria, status)
             VALUES (?, ?, ?, ?, ?, ?)";
 
-    // Preparar e executar a query
+
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("ssssss", $preco, $nome, $descricao, $tamanho, $faixa_etaria, $status);
 
@@ -42,7 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Inserir Produto</title>
 </head>
 <body>
-    <!-- Formulário para inserção de novo produto -->
     <h2>Adicionar Novo Produto</h2>
     <form action="inserirProd.php" method="POST">
         <label for="preco">Preço:</label>

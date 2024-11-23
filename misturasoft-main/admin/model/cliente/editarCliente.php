@@ -1,5 +1,5 @@
 <?php
-include("../control/conexao.php");
+include("conexao.php");
 
 if (isset($_GET['id'])) {
     $id_cliente = $_GET['id'];
@@ -30,10 +30,10 @@ if (isset($_GET['id'])) {
         $update_stmt->bind_param("sssssi", $nome, $email, $telefone, $endereco, $cpf, $id_cliente);
         
         if ($update_stmt->execute()) {
-            sleep(5);
+           
             echo "<script type='text/javascript'>
             alert('alteracao feita com xuxexo'); // Mensagem do alerta
-            window.location.href = '../view/cliente.php'; // Redireciona após o alerta
+            window.history.back()'; // Redireciona após o alerta
             </script>";
         exit;
         } else {

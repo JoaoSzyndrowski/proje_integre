@@ -1,18 +1,15 @@
 <?php
-include("../control/conexao.php");
+include("conexao.php");
 
-// Verifica se o ID foi passado na URL
 if (isset($_GET['id'])) {
     $id_usuario = $_GET['id'];
 
-    // Consulta para pegar os dados do usuário
     $sql = "SELECT id_usuario, nome, email FROM usuario WHERE id_usuario = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id_usuario);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Verifica se o usuário foi encontrado
     if ($result->num_rows == 0) {
         die("Usuário não encontrado.");
     }
@@ -20,12 +17,10 @@ if (isset($_GET['id'])) {
     $user = $result->fetch_assoc();
 }
 
-// Atualiza os dados do usuário quando o formulário for enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nome = $_POST['nome'];
     $email = $_POST['email'];
 
-    // Atualiza as informações do usuário no banco de dados
     $update_sql = "UPDATE usuario SET nome = ?, email = ? WHERE id_usuario = ?";
     $update_stmt = $conn->prepare($update_sql);
     $update_stmt->bind_param("ssi", $nome, $email, $id_usuario);
@@ -35,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     alert('Usuário excluído com sucesso!');
                     window.location.href = '../view/user.php'; // Redireciona para a lista de usuários após a exclusão
                   </script>";
-            exit;// Redireciona para a lista de usuários após a atualização
+            exit;
     } else {
         echo "Erro ao atualizar o usuário: " . $conn->error;
     }

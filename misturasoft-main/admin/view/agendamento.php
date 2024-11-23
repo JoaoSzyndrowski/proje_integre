@@ -39,8 +39,8 @@ $result = $conn->query($sql);
                     echo "<td>" . htmlspecialchars($row['horafim']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['id_cliente']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['sts']) . "</td>";
-                    echo "<td><a href='editarAg.php?id=" . $row['id_agenda'] . "'>Editar</a></td>";
-                    echo "<td><a href='excluirAg.php?id=" . $row['id_agenda'] . "'>Excluir</a></td>";
+                    echo "<td><a href='../model/agendamento/editarAg.php?id=" . $row['id_agenda'] . "'>Editar</a></td>";
+                    echo "<td><a href='../model/agendamento/excluirAg.php?id=" . $row['id_agenda'] . "'>Excluir</a></td>";
                     echo "</tr>";
                 }
             } else {

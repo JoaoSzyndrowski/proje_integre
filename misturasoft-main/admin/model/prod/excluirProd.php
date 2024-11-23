@@ -1,11 +1,10 @@
 <?php
-include("../../control/conexao.php");
+include("conexao.php");
 
-// Verifica se o ID foi passado na URL
+
 if (isset($_GET['id'])) {
+
     $id_produto = $_GET['id'];
-    
-    // Consulta para pegar os detalhes do produto antes de excluir
     $sql = "SELECT * FROM produto WHERE id_produto = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id_produto);
@@ -14,14 +13,11 @@ if (isset($_GET['id'])) {
     $produto = $result->fetch_assoc();
 
     if (!$produto) {
-        // Produto não encontrado
         echo "Produto não encontrado.";
         exit;
     }
 
-    // Verifica se o formulário de confirmação foi enviado
     if (isset($_POST['confirmar'])) {
-        // Deleta o produto do banco
         $delete_sql = "DELETE FROM produto WHERE id_produto = ?";
         $delete_stmt = $conn->prepare($delete_sql);
         $delete_stmt->bind_param("i", $id_produto);
@@ -59,7 +55,7 @@ if (isset($_GET['id'])) {
 
     <form method="POST">
         <input type="submit" name="confirmar" value="Confirmar Exclusão">
-        <a href="index.php">Cancelar</a> <!-- Ou onde você preferir redirecionar em caso de cancelamento -->
+        <a href="index.php">Cancelar</a> 
     </form>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-include("../control/conexao.php");
+include("conexao.php");
 
 // Verifica se o ID foi passado na URL
 if (isset($_GET['id'])) {
@@ -19,17 +19,14 @@ if (isset($_GET['id'])) {
         exit;
     }
 
-    // Verifica se o formulário de atualização foi enviado
     if (isset($_POST['atualizar'])) {
-        // Pega os dados do formulário
         $nome = $_POST['nome'];
         $preco = $_POST['preco'];
         $descricao = $_POST['descricao'];
         $tamanho = $_POST['tamanho'];
         $faixa_etaria = $_POST['faixa_etaria'];
         $status = $_POST['status'];
-
-        // Atualiza o produto no banco de dados
+        
         $update_sql = "UPDATE produto SET nome = ?, preco = ?, descricao = ?, tamanho = ?, faixa_etaria = ?, status = ? WHERE id_produto = ?";
         $update_stmt = $conn->prepare($update_sql);
         $update_stmt->bind_param("ssssssi", $nome, $preco, $descricao, $tamanho, $faixa_etaria, $status, $id_produto);

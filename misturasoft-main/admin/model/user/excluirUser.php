@@ -1,15 +1,12 @@
 <?php
-include("../../control/conexao.php");
+include("conexao.php");
 
 if ($conn->connect_error) {
     die("Erro de conexão: " . $conn->connect_error);
 }
 
-// Verifica se o ID do usuário foi passado na URL
 if (isset($_GET['id'])) {
     $id_usuario = $_GET['id'];
-
-    // Consulta para pegar os dados do usuário
     $sql = "SELECT id_usuario, nome, email FROM usuario WHERE id_usuario = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id_usuario);
@@ -22,9 +19,7 @@ if (isset($_GET['id'])) {
         exit;
     }
 
-    // Se o formulário de confirmação for enviado
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // Exclui o usuário
         $delete_usuario_sql = "DELETE FROM usuario WHERE id_usuario = ?";
         $delete_usuario_stmt = $conn->prepare($delete_usuario_sql);
 
@@ -34,7 +29,6 @@ if (isset($_GET['id'])) {
 
         $delete_usuario_stmt->bind_param("i", $id_usuario);
 
-        // Executa a exclusão
         if ($delete_usuario_stmt->execute()) {
             echo "<script type='text/javascript'>
                     alert('Usuário excluído com sucesso!');

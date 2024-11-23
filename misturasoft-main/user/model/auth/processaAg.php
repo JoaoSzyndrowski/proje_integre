@@ -11,16 +11,12 @@ $cep = isset($_POST['cep']) ? $_POST['cep'] : '';
 $complemento = isset($_POST['complemento']) ? $_POST['complemento'] : '';
 $idProduto = isset($_POST['id_produto']) ? $_POST['id_produto'] : '';
 $endereco = "$rua,$bairro,$cep,$complemento";
-
+$idUser = $_SESSION['id_user'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['botao']) && $data && $horaInicio && $horaFim && $idProduto) {
-    // Primeiro, insere o agendamento e obtém o id_agendamento
     $idAgendamento = cadastraAg($idProduto, $data, $horaInicio, $horaFim);
-
-    // Agora, chama cadastraAgProd para vincular o produto ao agendamento
     cadastraAgProd($idProduto, $idUser, $horaInicio, $horaFim, $endereco, $idAgendamento);
 }
-
 
 $sql = "SELECT nome FROM produto WHERE id_produto = ?";
 $stmt = $conn->prepare($sql);
@@ -61,24 +57,19 @@ if ($result->num_rows > 0) {
 </head>
 <style>
     body {
-        background-image: url("sim.png");
-        color: red;
         font-family: Arial, sans-serif;
         padding: 20px;
         text-align: center;
     }
-
     h3 {
         font-size: 24px;
         color: green;
         margin-bottom: 10px;
     }
-
     p {
         font-size: 18px;
         margin: 5px 0;
     }
-
     strong {
         color: #333;
     }
@@ -100,10 +91,6 @@ if ($result->num_rows > 0) {
         <input type="hidden" name="bairro" value="<?php echo $bairro; ?>">
         <input type="hidden" name="cep" value="<?php echo $cep; ?>">
         <input type="hidden" name="complemento" value="<?php echo $complemento; ?>">
-        
-        <?php
-
-        echo $endereco; ?>
         <input type="submit" name="botao" value="Confirmar Agendamento">
     </form>
 

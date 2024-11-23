@@ -16,6 +16,7 @@ $result = $conn->query($sql);
     <table border="1">
         <thead>
             <tr>
+            <a href="../model/cliente/inserirCliente.php">inserir clientes</a>
                 <th>ID</th>
                 <th>NOME</th>
                 <th>EMAIL</th>
@@ -37,8 +38,8 @@ $result = $conn->query($sql);
                     echo "<td>" . htmlspecialchars($row['telefone']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['endereco']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['cpf']) . "</td>"; 
-                    echo "<td><a href='../model/editarCliente.php?id=" . $row['id_cliente'] . "'>Editar</a></td>";
-                    echo "<td><a href='../model/excluirCliente.php?id=" . $row['id_cliente'] . "'>Excluir</a></td>";
+                    echo "<td><a href='../model/cliente/editarCliente.php?id=" . $row['id_cliente'] . "'>Editar</a></td>";
+                    echo "<td><a href='../model/cliente/excluirCliente.php?id=" . $row['id_cliente'] . "'>Excluir</a></td>";
                     echo "</tr>";
                 }
             } else {

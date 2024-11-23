@@ -1,5 +1,5 @@
 <?php
-include("../control/conexao.php");
+include("conexao.php");
 
 if ($conn->connect_error) {
     die("Erro de conexão: " . $conn->connect_error);
@@ -31,10 +31,9 @@ if (isset($_GET['id'])) {
 
     // executa a exclusao do cliente e do cliente na agenda :3
     if ($delete_agenda_stmt->execute() && $delete_cliente_stmt->execute()) {
-        sleep(5);
             echo "<script type='text/javascript'>
             alert('alteracao feita com xuxexo'); // Mensagem do alerta
-            window.location.href = '../view/cliente.php'; // Redireciona após o alerta
+            window.history.back(); // Redireciona após o alerta
             </script>";
         exit;
     } else {
