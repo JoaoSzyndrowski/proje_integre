@@ -5,7 +5,6 @@ if ($conn->connect_error) {
     die("Erro de conexão: " . $conn->connect_error);
 }
 
-// Verifica se o ID do cliente foi passado na URL
 if (isset($_GET['id'])) {
     $id_cliente = $_GET['id'];
 
@@ -56,13 +55,10 @@ if (isset($_GET['id'])) {
 </head>
 <body>
     <h1>Deseja excluir o cliente?</h1>
-
     <?php
-    // Verifica o ID na URL e exibe os dados do cliente
     if (isset($_GET['id'])) {
         $id_cliente = $_GET['id'];
         
-        // Consulta para pegar os dados do cliente
         $sql = "SELECT * FROM cliente WHERE id_cliente = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id_cliente);

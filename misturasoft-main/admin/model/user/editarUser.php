@@ -3,24 +3,19 @@ include("conexao.php");
 
 if (isset($_GET['id'])) {
     $id_usuario = $_GET['id'];
-
     $sql = "SELECT id_usuario, nome, email FROM usuario WHERE id_usuario = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id_usuario);
     $stmt->execute();
     $result = $stmt->get_result();
-
     if ($result->num_rows == 0) {
         die("Usuário não encontrado.");
     }
-
     $user = $result->fetch_assoc();
 }
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nome = $_POST['nome'];
     $email = $_POST['email'];
-
     $update_sql = "UPDATE usuario SET nome = ?, email = ? WHERE id_usuario = ?";
     $update_stmt = $conn->prepare($update_sql);
     $update_stmt->bind_param("ssi", $nome, $email, $id_usuario);
@@ -36,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,11 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label for="nome">Nome:</label>
         <input type="text" name="nome" id="nome" value="<?php echo htmlspecialchars($user['nome']); ?>" required>
         <br><br>
-
         <label for="email">Email:</label>
         <input type="email" name="email" id="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
         <br><br>
-
         <button type="submit">Atualizar</button>
     </form>
     <br>

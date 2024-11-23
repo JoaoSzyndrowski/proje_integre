@@ -41,7 +41,7 @@ session_start();
             <?php
             if (isset($_SESSION['user'])) {
                 echo "<div class='btn'>
-                        <a href='view/login.php'>
+                        <a href='view/perfil.php'>
                             <button>" . "Bem vindo, " . $_SESSION['user'] . "</button>
                         </a>
                     </div>";

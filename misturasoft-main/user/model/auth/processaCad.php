@@ -8,9 +8,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $senhaForm = $_POST['senha'];
-    
+    $telefone = $_POST['telefone'];
+    $endereco =$_POST['endereco'];
+    $cpf=$_POST['cpf'];
 
-    // Chamar a função de cadastro
-    criarLogin($nome, $email, $senhaForm);
+    criarLogin($nome, $email, $senhaForm,$telefone,$endereco, $cpf);
+    
 }
 ?>

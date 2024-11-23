@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($stmt->execute()) {
         echo "<script>alert('Cliente cadastrado com sucesso!');</script>";
-        echo "<script>window.history.back()</script>";  // Redireciona para o formulário
+        echo "<script>window.history.back()</script>";  
     } else {
         echo "Erro ao cadastrar cliente: " . $stmt->error;
     }

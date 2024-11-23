@@ -1,11 +1,9 @@
 <?php
 include("conexao.php");
 
-// Verifica se o ID foi passado via GET
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Query de DELETE
     $deleteSql = "DELETE FROM agendamento WHERE id_agenda = ?";
     $stmt = $conn->prepare($deleteSql);
     $stmt->bind_param('i', $id);

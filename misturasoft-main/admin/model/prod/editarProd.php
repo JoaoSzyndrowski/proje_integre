@@ -1,24 +1,18 @@
 <?php
 include("conexao.php");
 
-// Verifica se o ID foi passado na URL
 if (isset($_GET['id'])) {
     $id_produto = $_GET['id'];
-    
-    // Consulta para pegar os detalhes do produto que será editado
     $sql = "SELECT * FROM produto WHERE id_produto = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id_produto);
     $stmt->execute();
     $result = $stmt->get_result();
     $produto = $result->fetch_assoc();
-
     if (!$produto) {
-        // Produto não encontrado
         echo "Produto não encontrado.";
         exit;
     }
-
     if (isset($_POST['atualizar'])) {
         $nome = $_POST['nome'];
         $preco = $_POST['preco'];
@@ -26,11 +20,10 @@ if (isset($_GET['id'])) {
         $tamanho = $_POST['tamanho'];
         $faixa_etaria = $_POST['faixa_etaria'];
         $status = $_POST['status'];
-        
+    
         $update_sql = "UPDATE produto SET nome = ?, preco = ?, descricao = ?, tamanho = ?, faixa_etaria = ?, status = ? WHERE id_produto = ?";
         $update_stmt = $conn->prepare($update_sql);
         $update_stmt->bind_param("ssssssi", $nome, $preco, $descricao, $tamanho, $faixa_etaria, $status, $id_produto);
-        
         if ($update_stmt->execute()) {
             sleep(5);
             echo "<script type='text/javascript'>

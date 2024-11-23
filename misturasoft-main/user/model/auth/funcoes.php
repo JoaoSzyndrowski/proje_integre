@@ -1,6 +1,6 @@
 <?php
 session_start();
-function criarLogin($nome, $email, $senhaForm)
+function criarLogin($nome, $email, $senhaForm,$telefone,$endereco,$cpf)
 {
 
     include("conexao.php");
@@ -28,7 +28,18 @@ function criarLogin($nome, $email, $senhaForm)
     } else {
         echo "Erro ao cadastrar usuário: " . $stmt->error;
     }
+    $sqlCliente="INSERT INTO cliente (nome,email,telefone,endereco,cpf) 
+    VALUES (?,?,?,?,?)";
+    $stmt = $conn->prepare($sqlCliente);
+    $stmt->bind_param('sssss', $nome, $email, $telefone, $endereco, $cpf);
+
+    if ($stmt->execute()) {
+        echo "Cadastro cliente realizado com sucesso!";
+    } else {
+        echo "Erro ao cadastrar usuário: " . $stmt->error;
+    }
     $conn->close();
+    
 }
 
 
@@ -62,6 +73,7 @@ function login($email, $senhaForm)
     }
     $conn->close();
 }
+
 
 function cadastraAg($idProduto, $data, $horaInicio, $horaFim)
 {

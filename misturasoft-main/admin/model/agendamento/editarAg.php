@@ -1,11 +1,9 @@
 <?php
 include("conexao.php");
 
-// Verifica se o ID foi passado via GET
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Busca os dados do agendamento para preencher o formulário
     $sql = "SELECT * FROM agendamento WHERE id_agenda = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $id);
@@ -26,14 +24,12 @@ if (isset($_GET['id'])) {
     }
 }
 
-// Atualiza os dados quando o formulário for submetido
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = $_POST['data'];
     $hora_inicio = $_POST['hora_inicio'];
     $hora_fim = $_POST['hora_fim'];
     $status = $_POST['status'];
 
-    // Query de UPDATE
     $updateSql = "UPDATE agendamento SET data = ?, horainicio = ?, horafim = ?, sts = ? WHERE id_agenda = ?";
     $stmt = $conn->prepare($updateSql);
     $stmt->bind_param('ssssi', $data, $hora_inicio, $hora_fim, $status, $id);

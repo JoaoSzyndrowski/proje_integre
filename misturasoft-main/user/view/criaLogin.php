@@ -146,6 +146,8 @@
             <center><input type="text" id="nome" name="nome" placeholder="Nome Completo"></center>
             <center><input type="email" id="email" name="email" placeholder="Email"></center>
             <center><input type="password" id="senha" name="senha" placeholder="Senha"></center>
+            <center><input type="text" id="telefone" name="telefone" placeholder="Telefone"></center>
+            <center><input type="text" id="cpf" name="cpf" placeholder="CPF"></center>
             <center><select name="userTipo"></center>
             <center><option name="adm" value="adm">Administrador</option></center>
             <center><option name="cliente" value="cliente">Cliente</option></center>

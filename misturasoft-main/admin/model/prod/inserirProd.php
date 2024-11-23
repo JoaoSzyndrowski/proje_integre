@@ -11,12 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $sql = "INSERT INTO produto (preco, nome, descricao, tamanho, faixa_etaria, status)
             VALUES (?, ?, ?, ?, ?, ?)";
-
-
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("ssssss", $preco, $nome, $descricao, $tamanho, $faixa_etaria, $status);
-
-        // Executar a inserção
         if ($stmt->execute()) {
             echo "Produto inserido com sucesso!";
             header("Location: ../../view/brinquedo.php"); // Redireciona de volta à página principal após inserção
