@@ -45,11 +45,9 @@ function criarLogin($nome, $email, $senhaForm,$telefone,$endereco,$cpf)
 
 function login($email, $senhaForm)
 {
-
     include("conexao.php");
 
     $email = $conn->real_escape_string($email);
-
     $sql = "SELECT id_usuario, nome, email, senha FROM usuario WHERE email = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('s', $email);
@@ -60,18 +58,17 @@ function login($email, $senhaForm)
         $row = $result->fetch_assoc();
 
         if (password_verify($senhaForm, $row['senha'])) {
+            session_start();
             $_SESSION['id_user'] = $row['id_usuario'];
             $_SESSION['user'] = $row['nome'];
-            echo "Login bem-sucedido! Bem-vindo, " . htmlspecialchars($row['nome']);
             header("Location: /tccJAO/proje_integre/misturasoft-main/user/index.php");
             exit();
         } else {
-            echo "Senha incorreta.";
+            return "Senha incorreta.";
         }
     } else {
-        echo "Usuário não encontrado.";
+        return "Usuário não encontrado.";
     }
-    $conn->close();
 }
 
 

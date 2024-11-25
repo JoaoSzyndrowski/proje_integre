@@ -1,10 +1,23 @@
+<?php
+
+include_once '../model/auth/funcoes.php';  
+
+$mensagem = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'];
+    $senhaForm = $_POST['senha'];
+    
+    $mensagem = login($email, $senhaForm);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Login mistura soft</title>
+    <title>Login MisturaSoft</title>
     <style>
         * {
             margin: 0;
@@ -95,7 +108,7 @@
             font-size: 14px;
         }
 
-        .signup-section input, select, option {
+        .signup-section input {
             margin-bottom: 15px;
             padding: 10px;
             font-size: 16px;
@@ -128,27 +141,44 @@
                 padding: 20px;
             }
         }
+
+        .mensagem {
+            text-align: center;
+            margin-bottom: 15px;
+            color: red;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
 <div class="container">
-        <div class="login-section"> 
-            <img src="../imagens/logomini.png" alt="">
-            <h1>Seja bem-vindo à MisturaSoft!</h1>
-            <br><br><br><br>
-            <p>Não tem uma conta?</p>
-            <a href="criaLogin.php">
+    <!-- Seção de Boas-vindas -->
+    <div class="login-section">
+        <img src="../imagens/logomini.png" alt="Logo">
+        <h1>Seja bem-vindo à MisturaSoft!</h1>
+        <p>Não tem uma conta?</p>
+        <a href="criaLogin.php">
             <button>Cadastro</button>
-            </a>
-        </div>
-        <div class="signup-section">
-            <form action="../model/auth/processaLogin.php" method="POST">
-            <h2>Logar</h2>
-           <center> <input type="email" id="email" name="email" placeholder="Email"></center>
-            <center><input type="password" id="senha" name="senha" placeholder="Senha"></center>
-            <center><button type="submit">Logar</button></center>
-            </form>
-        </div>
+        </a>
     </div>
+
+    <!-- Seção de Login -->
+    <div class="signup-section">
+        <h2>Logar</h2>
+
+        <!-- Exibição de mensagens -->
+        <?php if (!empty($mensagem)): ?>
+            <div class="mensagem"><?php echo htmlspecialchars($mensagem); ?></div>
+        <?php endif; ?>
+
+        <form action="" method="POST">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Digite seu email" required>
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+            <button type="submit">Logar</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>
